@@ -5,16 +5,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">
-		<h:outputText value="#{cadastroLivroBean.tituloPagina}"/> Livro
-	</ui:define>
+	<ui:define name="titulo">#{cadastroLivroBean.editando ? 'Edição Livro' : 'Novo Livro'}</ui:define>
+
 
 	<ui:define name="corpo">
 		<f:metadata>
 			<o:viewParam name="livro" value="#{cadastroLivroBean.livro}" />
 		</f:metadata>
 
-		<h1><h:outputText value="#{cadastroLivroBean.tituloPagina}"/> Livro</h1>
+		<h1>#{cadastroLivroBean.editando ? 'Edição Livro' :
+			'Novo Livro'}</h1>
 
 		<h:form id="frmCadastroLivro">
 			<p:messages id="messages" closable="true">
@@ -35,14 +35,16 @@
 
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				
-				<p:outputLabel value="Id" for="id"  rendered="#{cadastroLivroBean.modoEdicao}" />
-				<p:inputMask id="id" size="60" maxlength="11" rendered="#{cadastroLivroBean.modoEdicao}" disabled="true" 
+
+				<p:outputLabel value="Id" for="id"
+					rendered="#{cadastroLivroBean.editando}" />
+				<p:inputMask id="id" size="60" maxlength="11"
+					rendered="#{cadastroLivroBean.editando}" disabled="true"
 					value="#{cadastroLivroBean.livro.id}">
 				</p:inputMask>
-				
+
 				<p:outputLabel value="ISBN" for="isbn" />
-				<p:inputMask id="isbn" size="11"  maxlength="11" required="true"
+				<p:inputMask id="isbn" size="11" maxlength="11" required="true"
 					value="#{cadastroLivroBean.livro.isbn}">
 				</p:inputMask>
 
@@ -61,8 +63,8 @@
 					value="#{cadastroLivroBean.livro.titulo}" />
 
 				<p:outputLabel value="Valor" for="valor" />
-				<p:inputNumber id="valor" value="#{cadastroLivroBean.livro.valor}" required="true"
-					minValue="0" decimalPlaces="2" decimalSeparator=","
+				<p:inputNumber id="valor" value="#{cadastroLivroBean.livro.valor}"
+					required="true" minValue="0" decimalPlaces="2" decimalSeparator=","
 					thousandSeparator=".">
 				</p:inputNumber>
 

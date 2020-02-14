@@ -34,7 +34,7 @@ public class ListagemLivrosBean implements Serializable {
 		try {
 			livroDAO.excluir(livroSelecionado);
 			this.livros.remove(livroSelecionado);
-			FacesUtil.addSuccessMessage("Modelo " + livroSelecionado.getTitulo() + " excluído com sucesso.");
+			FacesUtil.addSuccessMessage("Livro " + livroSelecionado.getTitulo() + " excluído com sucesso.");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}

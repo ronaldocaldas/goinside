@@ -1,6 +1,7 @@
 package com.goinside.jpa2.controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,15 +10,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.goinside.jpa2.dao.FornecedorDAO;
+import com.goinside.jpa2.model.Cliente;
 import com.goinside.jpa2.model.Fornecedor;
-import com.goinside.jpa2.model.Livro;
-import com.goinside.jpa2.service.CadastroLivroService;
+import com.goinside.jpa2.model.Sexo;
+import com.goinside.jpa2.service.CadastroClienteService;
 import com.goinside.jpa2.service.NegocioException;
 import com.goinside.jpa2.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
-public class CadastroLivroBean implements Serializable {
+public class CadastroClienteBean implements Serializable {
 
 	/**
 	 * 
@@ -25,45 +27,45 @@ public class CadastroLivroBean implements Serializable {
 	private static final long serialVersionUID = 6049201077111630380L;
 
 	@Inject
-	private CadastroLivroService cadastroLivroService;
+	private CadastroClienteService cadastroClienteService;
 
 	@Inject
 	private FornecedorDAO fornecedorDAO;
 
-	private Livro livro;
+	private Cliente cliente;
 
 	private List<Fornecedor> fornecedores;
+	
+	private List<Sexo> sexos;
+
 
 	@PostConstruct
 	public void init() {
 		this.limpar();
 		this.fornecedores = fornecedorDAO.buscarTodos();
+		this.sexos = Arrays.asList(Sexo.values());
 	}
 
 	public void limpar() {
-		this.livro = new Livro();
+		this.cliente = new Cliente();
 	}
 
 	public void salvar() {
 		try {
-			this.cadastroLivroService.salvar(livro);
-			FacesUtil.addSuccessMessage("Livro " + livro.getTitulo() + " salvo com sucesso!");
+			this.cadastroClienteService.salvar(cliente);
+			FacesUtil.addSuccessMessage("Cliente " + cliente.getNome() + " salvo com sucesso!");
 
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
 	}
-	
-	public void editar(){
-		setLivro(this.cadastroLivroService.buscaLivroCompleto(this.livro.getId()));
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public Livro getLivro() {
-		return livro;
-	}
-
-	public void setLivro(Livro livro) {
-		this.livro = livro;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public List<Fornecedor> getFornecedores() {
@@ -74,7 +76,18 @@ public class CadastroLivroBean implements Serializable {
 		this.fornecedores = fornecedores;
 	}
 	
-	public boolean isEditando() {
-		return this.livro.getId() != null;
+	public List<Sexo> getSexos() {
+		return sexos;
 	}
+
+	public void setSexos(List<Sexo> sexos) {
+		this.sexos = sexos;
+	}
+
+	
+	public boolean isEditando() {
+		return this.cliente.getId() != null;
+	}
+	
+	
 }

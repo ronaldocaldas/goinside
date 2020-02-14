@@ -6,36 +6,31 @@ import javax.inject.Inject;
 
 import org.hibernate.exception.ConstraintViolationException;
 
-import com.goinside.jpa2.dao.LivroDAO;
-import com.goinside.jpa2.model.Livro;
+import com.goinside.jpa2.dao.ClienteDAO;
+import com.goinside.jpa2.model.Cliente;
 import com.goinside.jpa2.util.jpa.Transactional;
 
-public class CadastroLivroService implements Serializable {
+public class CadastroClienteService implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private LivroDAO livroDAO;
+	private ClienteDAO clienteDAO;
 
 	@Transactional
-	public void salvar(Livro livro) throws NegocioException {
+	public void salvar(Cliente cliente) throws NegocioException {
 
 		try {
-			this.livroDAO.salvar(livro);
+			this.clienteDAO.salvar(cliente);
 		} catch (Exception e) {
 			if (e.getCause() instanceof ConstraintViolationException) {
-				throw new NegocioException("O ISBN " + livro.getIsbn() + " já foi registrado!");
-
+				throw new NegocioException("O CPF " + cliente.getCpf() + " já foi registrado!");
 			} else {
 				throw new NegocioException(e.getMessage());
 			}
 		}
 
-	}
-
-	public Livro buscaLivroCompleto(Long id) {
-		return livroDAO.buscarComFornecedorPeloCodigo(id);
 	}
 }

@@ -60,4 +60,8 @@ public class CadastroFornecedorBean implements Serializable {
 	public void setCadastroFornecedorService(CadastroFornecedorService cadastroFornecedorService) {
 		this.cadastroFornecedorService = cadastroFornecedorService;
 	}
+	
+	public boolean isEditando() {
+		return this.fornecedor.getId() != null;
+	}
 }

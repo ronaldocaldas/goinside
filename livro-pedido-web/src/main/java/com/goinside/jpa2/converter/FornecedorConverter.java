@@ -24,7 +24,7 @@ public class FornecedorConverter implements Converter {
 		Fornecedor retorno = null;
 
 		if (value != null) {
-			retorno = this.fornecedorDAO.buscarPeloCodigo(new Long(value));
+			retorno = this.fornecedorDAO.buscarPeloId(new Long(value));
 		}
 
 		return retorno;
@@ -33,7 +33,7 @@ public class FornecedorConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Long codigo = ((Fornecedor) value).getCodigo();
+			Long codigo = ((Fornecedor) value).getId();
 			String retorno = (codigo == null ? null : codigo.toString());
 
 			return retorno;

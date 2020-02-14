@@ -8,7 +8,7 @@
 	<ui:define name="titulo">Pesquisa de Fornecedors</ui:define>
 
 	<ui:define name="corpo">
-		<h1>Pesquisa de Fornecedores</h1>
+		<h1>Listagem de Fornecedores</h1>
 
 		<h:form id="frmPesquisa">
 			<p:messages id="messages" closable="true" >
@@ -23,7 +23,7 @@
 			</p:toolbar>
 
 			<p:dataTable id="fornecedorsTable"
-				value="#{pesquisaFornecedorBean.fornecedores}" var="fornecedor"
+				value="#{listagemFornecedorBean.fornecedores}" var="fornecedor"
 				style="margin-top: 20px"
 				emptyMessage="Nenhum fornecedor encontrado." rows="10"
 				paginator="true" paginatorAlwaysVisible="false"
@@ -41,14 +41,14 @@
 				<p:column style="width: 100px; text-align: center">
 					<p:button outcome="CadastroFornecedor" icon="ui-icon-pencil"
 						title="Editar">
-						<f:param name="fornecedor" value="#{fornecedor.codigo}" />
+						<f:param name="fornecedor" value="#{fornecedor.id}" />
 					</p:button>
 
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						action="#{pesquisaFornecedorBean.excluir}"
+						action="#{listagemFornecedorBean.excluir}"
 						update="fornecedorsTable">
 						<f:setPropertyActionListener
-							target="#{pesquisaFornecedorBean.fornecedorSelecionado}"
+							target="#{listagemFornecedorBean.fornecedorSelecionado}"
 							value="#{fornecedor}" />
 						<p:confirm header="Exclusão de fornecedor"
 							message="Tem certeza que deseja excluir o fornecedor #{fornecedor.nomeFantasia}?"

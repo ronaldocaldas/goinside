@@ -5,15 +5,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">Novo Fornecedor</ui:define>
-
+	<ui:define name="titulo">#{cadastroFornecedorBean.editando ? 'Edição Fornecedor' : 'Novo Fornecedor'}</ui:define>
+	
 	<ui:define name="corpo">
 		<f:metadata>
 			<o:viewParam name="fornecedor"
 				value="#{cadastroFornecedorBean.fornecedor}" />
 		</f:metadata>
 
-		<h1>Novo Fornecedor</h1>
+		<h1>#{cadastroFornecedorBean.editando ? 'Edição Fornecedor' : 'Novo Fornecedor'}</h1>
 
 		<h:form id="frmCadastro">
 			<p:messages id="messages" closable="true">
@@ -27,7 +27,7 @@
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:toolbarGroup align="right">
-						<p:button value="Pesquisa" outcome="PesquisaFornecedores" />
+						<p:button value="Listagem" outcome="ListagemFornecedores" />
 					</p:toolbarGroup>
 				</p:toolbarGroup>
 			</p:toolbar>
@@ -35,10 +35,10 @@
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 
-				<p:outputLabel value="Código" for="codigo" />
-				<p:inputMask id="codigo" size="60" maxlength="11" disabled="true"
+				<p:outputLabel value="Código" for="codigo"  />
+				<p:inputText id="codigo" size="11" maxlength="11" required="true"
 					value="#{cadastroFornecedorBean.fornecedor.codigo}">
-				</p:inputMask>
+				</p:inputText>
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" maxlength="80" required="true"

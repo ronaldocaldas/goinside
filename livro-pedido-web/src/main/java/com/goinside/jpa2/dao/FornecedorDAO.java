@@ -33,7 +33,7 @@ public class FornecedorDAO implements Serializable{
 	@Transactional
 	public void excluir(Fornecedor fornecedorSelecionado) throws NegocioException {
 		try {
-			Fornecedor fornecedor = em.find(Fornecedor.class, fornecedorSelecionado.getCodigo());
+			Fornecedor fornecedor = em.find(Fornecedor.class, fornecedorSelecionado.getId());
 			em.remove(fornecedor);
 			em.flush();
 		} catch (Exception e) {
@@ -46,8 +46,8 @@ public class FornecedorDAO implements Serializable{
 		
 	}
 
-	public Fornecedor buscarPeloCodigo(Long codigo) {
-		return em.find(Fornecedor.class, codigo);
+	public Fornecedor buscarPeloId(Long id) {
+		return em.find(Fornecedor.class, id);
 	}
 	
 	public void setEntityManager(EntityManager manager) {

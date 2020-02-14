@@ -36,8 +36,8 @@
 		    		</p:column>
 		    		
 		    		<p:column style="width: 100px; text-align: center">
-		    			<p:button outcome="CadastroLivro" icon="ui-icon-pencil" title="Editar">
-		    				<f:param name="livro" value="#{livro}"/>
+		    			<p:button outcome="CadastroLivro" icon="ui-icon-pencil" title="Editar" >
+		    				<f:param name="livro" value="#{livro.id}"/>
 		    			</p:button>
 		    		
 						<p:commandButton icon="ui-icon-trash" title="Excluir"  action="#{listagemLivrosBean.excluir}"  update="livrosTable">
