@@ -9,15 +9,15 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.goinside.jpa2.model.Cliente;
 import com.goinside.jpa2.model.Sexo;
-import com.goinside.jpa2.service.CadastroClienteService;
+import com.goinside.jpa2.model.Vendedor;
+import com.goinside.jpa2.service.CadastroVendedorService;
 import com.goinside.jpa2.service.NegocioException;
 import com.goinside.jpa2.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
-public class CadastroClienteBean implements Serializable {
+public class CadastroVendedorBean implements Serializable {
 
 	/**
 	 * 
@@ -25,9 +25,9 @@ public class CadastroClienteBean implements Serializable {
 	private static final long serialVersionUID = 6049201077111630380L;
 
 	@Inject
-	private CadastroClienteService cadastroClienteService;
+	private CadastroVendedorService cadastroVendedorService;
 
-	private Cliente cliente;
+	private Vendedor vendedor;
 	private List<Sexo> sexos;
 
 
@@ -38,25 +38,25 @@ public class CadastroClienteBean implements Serializable {
 	}
 
 	public void limpar() {
-		this.cliente = new Cliente();
+		this.vendedor = new Vendedor();
 	}
 
 	public void salvar() {
 		try {
-			this.cadastroClienteService.salvar(cliente);
-			FacesUtil.addSuccessMessage("Cliente " + cliente.getNome() + " salvo com sucesso!");
+			this.cadastroVendedorService.salvar(vendedor);
+			FacesUtil.addSuccessMessage("Vendedor " + vendedor.getNome() + " salvo com sucesso!");
 
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Vendedor getVendedor() {
+		return vendedor;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
 	public List<Sexo> getSexos() {
@@ -69,7 +69,7 @@ public class CadastroClienteBean implements Serializable {
 
 	
 	public boolean isEditando() {
-		return this.cliente.getId() != null;
+		return this.vendedor.getId() != null;
 	}
 	
 	

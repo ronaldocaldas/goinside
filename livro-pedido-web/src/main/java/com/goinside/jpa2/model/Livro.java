@@ -21,6 +21,8 @@ public class Livro {
 
 	private String isbn;
 	private String titulo;
+	private String autor;
+	
 	private BigDecimal valor;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -49,6 +51,14 @@ public class Livro {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 	public BigDecimal getValor() {
