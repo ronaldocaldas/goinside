@@ -1,0 +1,60 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Listagem de Livros</ui:define>
+    
+    <ui:define name="corpo">
+    	<h1>Listagem de Livros</h1>
+    	
+    	<h:form id="frmPesquisa">
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Novo" id="botaoNovo" action="/livro/CadastroLivro.xhtml"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    	
+	    	<p:dataTable id="livrosTable" value="#{listagemLivrosBean.livros}" var="livro"
+		    		style="margin-top: 20px" emptyMessage="Nenhum livro encontrado." rows="20"
+		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		<p:column headerText="Código" style="text-align: center; width: 100px">
+		    			<h:outputText value="#{livro.id}" />
+		    		</p:column>
+		    		<p:column headerText="ISBN">
+		    			<h:outputText value="#{livro.isbn}" />
+		    		</p:column>
+		    		<p:column headerText="Título">
+		    			<h:outputText value="#{livro.titulo}" />
+		    		</p:column>
+		    		<p:column headerText="Fornecedor">
+		    			<h:outputText value="#{livro.fornecedor.nomeFantasia}" />
+		    		</p:column>
+		    		
+		    		<p:column style="width: 100px; text-align: center">
+		    			<p:button outcome="CadastroLivro" icon="ui-icon-pencil" title="Editar">
+		    				<f:param name="livro" value="#{livro}"/>
+		    			</p:button>
+		    		
+						<p:commandButton icon="ui-icon-trash" title="Excluir"  action="#{listagemLivrosBean.excluir}"  update="livrosTable">
+							<f:setPropertyActionListener target="#{listagemLivrosBean.livroSelecionado}" value="#{livro}" />
+							        <p:confirm header="Exclusão de livro" message="Tem certeza que deseja excluir o livro #{livro.titulo}?" icon="ui-icon-alert" />
+						</p:commandButton>
+						
+		    		</p:column>
+		    </p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+	    </h:form>
+    </ui:define>
+</ui:composition>

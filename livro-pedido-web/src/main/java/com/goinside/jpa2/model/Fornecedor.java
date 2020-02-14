@@ -7,12 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="fornecedor")
+@Table(name = "fornecedor")
 public class Fornecedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
+	
 	private String nomeFantasia;
 	private String endereco;
 
@@ -38,6 +39,28 @@ public class Fornecedor {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		if (codigo != other.codigo)
+			return false;
+		return true;
 	}
 
 }

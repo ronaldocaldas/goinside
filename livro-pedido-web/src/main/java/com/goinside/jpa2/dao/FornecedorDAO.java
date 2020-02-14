@@ -38,7 +38,7 @@ public class FornecedorDAO implements Serializable{
 			em.flush();
 		} catch (Exception e) {
 			if (e.getCause() instanceof ConstraintViolationException) {
-				throw new NegocioException("O fornecedor "+fornecedorSelecionado.getNomeFantasia()+" não pode ser excluído porque já  votou!");
+				throw new NegocioException("O fornecedor "+fornecedorSelecionado.getNomeFantasia()+" não pode ser excluído!");
 			}else{
 				throw new NegocioException(e.getMessage());
 			}
@@ -46,7 +46,7 @@ public class FornecedorDAO implements Serializable{
 		
 	}
 
-	public Fornecedor buscarPeloCocigo(Long codigo) {
+	public Fornecedor buscarPeloCodigo(Long codigo) {
 		return em.find(Fornecedor.class, codigo);
 	}
 	

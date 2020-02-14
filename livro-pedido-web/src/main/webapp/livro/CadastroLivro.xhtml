@@ -1,0 +1,72 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">
+		<h:outputText value="#{cadastroLivroBean.tituloPagina}"/> Livro
+	</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="livro" value="#{cadastroLivroBean.livro}" />
+		</f:metadata>
+
+		<h1><h:outputText value="#{cadastroLivroBean.tituloPagina}"/> Livro</h1>
+
+		<h:form id="frmCadastroLivro">
+			<p:messages id="messages" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroLivroBean.salvar}" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="ListagemLivros" />
+					</p:toolbarGroup>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Id" for="id"  rendered="#{cadastroLivroBean.modoEdicao}" />
+				<p:inputMask id="id" size="60" maxlength="11" rendered="#{cadastroLivroBean.modoEdicao}" disabled="true" 
+					value="#{cadastroLivroBean.livro.id}">
+				</p:inputMask>
+				
+				<p:outputLabel value="ISBN" for="isbn" />
+				<p:inputMask id="isbn" size="11"  maxlength="11" required="true"
+					value="#{cadastroLivroBean.livro.isbn}">
+				</p:inputMask>
+
+				<p:outputLabel value="Fornecedor" for="fornecedor" />
+				<p:selectOneMenu id="fornecedor"
+					value="#{cadastroLivroBean.livro.fornecedor}" style="width: 170px"
+					required="true">
+					<f:selectItem itemLabel="Selecione o fornecedor" />
+					<f:selectItems value="#{cadastroLivroBean.fornecedores}"
+						var="fornecedor" itemLabel="#{fornecedor.nomeFantasia}"
+						itemValue="#{fornecedor}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Título" for="titulo" />
+				<p:inputText id="titulo" size="60" maxlength="80" required="true"
+					value="#{cadastroLivroBean.livro.titulo}" />
+
+				<p:outputLabel value="Valor" for="valor" />
+				<p:inputNumber id="valor" value="#{cadastroLivroBean.livro.valor}" required="true"
+					minValue="0" decimalPlaces="2" decimalSeparator=","
+					thousandSeparator=".">
+				</p:inputNumber>
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

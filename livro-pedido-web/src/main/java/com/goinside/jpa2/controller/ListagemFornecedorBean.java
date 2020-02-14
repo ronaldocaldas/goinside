@@ -14,11 +14,9 @@ import com.goinside.jpa2.model.Fornecedor;
 import com.goinside.jpa2.service.NegocioException;
 import com.goinside.jpa2.util.jsf.FacesUtil;
 
-
-
 @Named
 @ViewScoped
-public class PesquisaFornecedorBean implements Serializable {
+public class ListagemFornecedorBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

@@ -29,7 +29,6 @@ public class CadastroFornecedorBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.limpar();
-
 	}
 
 	public void limpar() {
@@ -61,5 +60,4 @@ public class CadastroFornecedorBean implements Serializable {
 	public void setCadastroFornecedorService(CadastroFornecedorService cadastroFornecedorService) {
 		this.cadastroFornecedorService = cadastroFornecedorService;
 	}
-
 }

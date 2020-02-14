@@ -5,26 +5,25 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.goinside.jpa2.dao.FornecedorDAO;
-import com.goinside.jpa2.model.Fornecedor;
+import com.goinside.jpa2.dao.LivroDAO;
+import com.goinside.jpa2.model.Livro;
 import com.goinside.jpa2.util.cdi.CDIServiceLocator;
 
+@FacesConverter(forClass = Livro.class)
+public class LivroConverter implements Converter {
 
-@FacesConverter(forClass = Fornecedor.class)
-public class FornecedorConverter implements Converter {
+	private LivroDAO livroDAO;
 
-	private FornecedorDAO fornecedorDAO;
-
-	public FornecedorConverter() {
-		this.fornecedorDAO = CDIServiceLocator.getBean(FornecedorDAO.class);
+	public LivroConverter() {
+		this.livroDAO = CDIServiceLocator.getBean(LivroDAO.class);
 	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Fornecedor retorno = null;
+		Livro retorno = null;
 
 		if (value != null) {
-			retorno = this.fornecedorDAO.buscarPeloCodigo(new Long(value));
+			retorno = this.livroDAO.buscarPeloId(new Long(value));
 		}
 
 		return retorno;
@@ -33,9 +32,8 @@ public class FornecedorConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Long codigo = ((Fornecedor) value).getCodigo();
-			String retorno = (codigo == null ? null : codigo.toString());
-
+			Long id = ((Livro) value).getId();
+			String retorno = (id == null ? null : id.toString());
 			return retorno;
 		}
 
