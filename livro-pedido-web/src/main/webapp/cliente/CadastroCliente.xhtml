@@ -53,8 +53,9 @@
 	    		
 				
 				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputMask id="cpf" size="11"  maxlength="11" required="true"
+				<p:inputMask id="cpf" size="14"  maxlength="11" required="true" mask="999.999.999-99" 
 					value="#{cadastroClienteBean.cliente.cpf}">
+						<f:validator validatorId="cpf" />
 				</p:inputMask>
 
 				<p:outputLabel value="Data de nascimento" for="dataNascimento" />

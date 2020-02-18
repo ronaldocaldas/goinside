@@ -22,6 +22,7 @@ public class Livro {
 	private String isbn;
 	private String titulo;
 	private String autor;
+	private Long estoque;
 	
 	private BigDecimal valor;
 
@@ -59,6 +60,14 @@ public class Livro {
 
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+
+	public Long getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Long estoque) {
+		this.estoque = estoque;
 	}
 
 	public BigDecimal getValor() {

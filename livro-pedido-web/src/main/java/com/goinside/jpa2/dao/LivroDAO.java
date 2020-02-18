@@ -43,8 +43,7 @@ public class LivroDAO implements Serializable {
 	}
 
 	public Livro buscarComFornecedorPeloCodigo(Long id) {
-		return manager
-				.createQuery("select c from Livro c inner join fetch c.fabricante where c.id = :id", Livro.class)
+		return manager.createQuery("select c from Livro c inner join fetch c.fabricante where c.id = :id", Livro.class)
 				.setParameter("id", id).getSingleResult();
 	}
 

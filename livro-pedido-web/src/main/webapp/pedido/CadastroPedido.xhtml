@@ -1,0 +1,173 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Cadastro de Pedidos</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="listaItens"
+				value="#{cadastroPedidoBean.listaItens}" />
+		</f:metadata>
+
+		<h1>Cadastro de Pedidos</h1>
+
+		<h:form id="frmListagem">
+			<p:messages id="messages" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+
+			<p:toolbar style="margin-top: 10px; padding: 10px">
+				<p:toolbarGroup align="left">
+					<p:toolbarGroup align="left">
+						<p:commandButton value="Limpar lista" id="botaoLimpar"
+							action="#{cadastroPedidoBean.limparPedido}"
+							update="listaItensTable" />
+					</p:toolbarGroup>
+					<p:toolbarGroup>
+						<p:commandButton value="Cadastrar Item" id="botaoSalvar"
+							type="button" onclick="PF('modalPedido').show();" />
+					</p:toolbarGroup>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2">
+				<p:dataTable id="listaItensTable" var="itemPedido" rows="10"
+					paginator="true" emptyMessage="Nenhum item adicionado"
+					value="#{cadastroPedidoBean.listaItens}"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+					<f:facet name="header">Lista de Itens do Pedido </f:facet>
+
+					<p:column headerText="Cliente">
+						<h:outputText value="#{itemPedido.cliente.nome}" />
+					</p:column>
+
+					<p:column headerText="Vendedor">
+						<h:outputText value="#{itemPedido.vendedor.nome}" />
+					</p:column>
+
+					<p:column headerText="Livro">
+						<h:outputText value="#{itemPedido.livro.titulo}" />
+					</p:column>
+
+					<p:column headerText="Valor" style="text-align:right">
+						<h:outputText value="#{itemPedido.livro.valor}">
+							<f:convertNumber type="currency" currencySymbol="R$" />
+						</h:outputText>
+					</p:column>
+					<f:facet name="footer">
+						<p:outputPanel style="text-align:right"
+							rendered="#{cadastroPedidoBean.listaNaoVazia}">
+							Total: 
+							<h:outputText value="#{cadastroPedidoBean.totalPedido}">
+								<f:convertNumber type="currency" currencySymbol="R$" />
+							</h:outputText>
+						</p:outputPanel>
+					</f:facet>
+
+				</p:dataTable>
+				<p:dataTable id="listaPedidosTable" var="pedido" rows="10"
+					paginator="true" emptyMessage="Nenhum pedido adicionado"
+					value="#{cadastroPedidoBean.todosPedidos}"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+					<f:facet name="header">Lista de Pedidos </f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{pedido.id}" />
+					</p:column>
+
+					<p:column headerText="Data pedido">
+						<h:outputText value="#{pedido.dataPedido}" />
+					</p:column>
+
+					<p:column style="text-align: center">
+						<p:commandButton update=":itemPedidoDateilsForm:itemPedidoDetail" action="#{cadastroPedidoBean.buscaItemsDetalhe}"
+							oncomplete="PF('itemPedidoDialog').show()" icon="pi pi-search"
+							title="View">
+							<f:setPropertyActionListener value="#{pedido}"
+								target="#{cadastroPedidoBean.pedidoSelecionado}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:commandButton value="Cadastrar Pedido"
+					action="#{cadastroPedidoBean.finalizaPedido}"
+					rendered="#{cadastroPedidoBean.listaNaoVazia}"
+					update="listaItensTable, listaPedidosTable" />
+			</p:panelGrid>
+
+		</h:form>
+		<p:dialog header="Lista itens" widgetVar="itemPedidoDialog" width="600"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="itemPedidoDateilsForm">
+				<p:outputPanel id="itemPedidoDetail" style="text-align:center;">
+					<p:dataTable d="listaItemsPedidosTable" var="itemPedido" rows="10"
+						paginator="true" emptyMessage="Pedido não contêm itens"
+						value="#{cadastroPedidoBean.itemsDetalhe}"
+						paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+						<f:facet name="header">Lista de Itens do Pedido </f:facet>
+
+						<p:column headerText="Cliente">
+							<h:outputText value="#{itemPedido.cliente.nome}" />
+						</p:column>
+
+						<p:column headerText="Vendedor">
+							<h:outputText value="#{itemPedido.vendedor.nome}" />
+						</p:column>
+
+						<p:column headerText="Livro">
+							<h:outputText value="#{itemPedido.livro.titulo}" />
+						</p:column>
+
+						<p:column headerText="Valor" style="text-align:right">
+							<h:outputText value="#{itemPedido.livro.valor}">
+								<f:convertNumber type="currency" currencySymbol="R$" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog header="Adicione Item ao Pedido" widgetVar="modalPedido"
+			id="idModal" modal="true">
+			<h:form id="itemPedidoForm">
+				<h:panelGrid columns="2" id="gridPanelPedidoId">
+					<p:outputLabel value="Cliente:" for="clienteId" />
+					<p:autoComplete id="clienteId" required="true"
+						value="#{cadastroPedidoBean.clienteSelecionado}" var="cliente"
+						itemLabel="#{cliente.nome}" itemValue="#{cliente}"
+						label="Digite o nome do cliente"
+						completeMethod="#{cadastroPedidoBean.buscaCliente}" />
+
+					<p:outputLabel value="Vendedor:" for="vendedorId" />
+					<p:autoComplete id="vendedorId" required="true"
+						value="#{cadastroPedidoBean.vendedorSelecionado}" var="vendedor"
+						itemLabel="#{vendedor.nome}" itemValue="#{vendedor}"
+						label="Digite o nome do vendedor"
+						completeMethod="#{cadastroPedidoBean.buscaVendedor}" />
+
+					<p:outputLabel value="Livro:" for="livroId" />
+					<p:autoComplete id="livroId" required="true"
+						value="#{cadastroPedidoBean.livroSelecionado}" var="livro"
+						itemLabel="#{livro.titulo}" itemValue="#{livro}"
+						label="Digite o titulo livro"
+						completeMethod="#{cadastroPedidoBean.buscaLivro}" />
+					<p:outputLabel />
+					<p:commandButton value="Adicionar Item"
+						action="#{cadastroPedidoBean.adicionaPedido}"
+						update="frmListagem, idModal" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

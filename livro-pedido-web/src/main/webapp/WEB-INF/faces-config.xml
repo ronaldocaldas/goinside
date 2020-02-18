@@ -10,5 +10,9 @@
 			<default-locale>pt_BR</default-locale>
 		</locale-config>
 	</application>
+	<validator>
+		<validator-id>cpf</validator-id>
+		<validator-class>com.goinside.jpa2.validator.CPFValidator</validator-class>
+	</validator>
 
 </faces-config>
