@@ -47,4 +47,7 @@ public class ItemPedidoDAO implements Serializable {
 		}
 	}
 
+	public void setEntityManager(EntityManager manager) {
+		this.manager = manager;
+	}
 }

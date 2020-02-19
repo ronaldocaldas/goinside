@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<fornecedor id="1" nomeFantasia="Amazon"  />
+	<fornecedor id="2" nomeFantasia="Livraria Cultura" />
+	<fornecedor id="3" nomeFantasia="Saraiva" />
+	<fornecedor id="4" nomeFantasia="Livraria Curitiba" />
+</dataset>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<item_pedido id="1" id_cliente="4" id_livro="1" pedido_id="1" id_vendedor="1" />
+	<item_pedido id="2" id_cliente="4" id_livro="2" pedido_id="1" id_vendedor="1"/>
+	<item_pedido id="3" id_cliente="6" id_livro="3" pedido_id="2" id_vendedor="2"/>
+	<item_pedido id="4" id_cliente="6" id_livro="2" pedido_id="2" id_vendedor="2"/>
+</dataset>

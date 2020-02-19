@@ -48,4 +48,7 @@ public class VendedorDAO implements Serializable {
 				.setParameter("nome", "%" + nome + "%").getSingleResult();
 	}
 
+	public void setEntityManager(EntityManager manager) {
+		this.manager = manager;
+	}
 }

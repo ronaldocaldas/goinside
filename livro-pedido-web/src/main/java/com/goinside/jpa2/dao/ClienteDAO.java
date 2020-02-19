@@ -47,5 +47,10 @@ public class ClienteDAO implements Serializable {
 		return manager.createQuery("select c from Cliente c where c.nome like :nome", Cliente.class)
 				.setParameter("nome", "%" + nome + "%").getSingleResult();
 	}
+	
+
+	public void setEntityManager(EntityManager manager) {
+		this.manager = manager;
+	}
 
 }

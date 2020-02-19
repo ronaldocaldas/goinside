@@ -47,4 +47,7 @@ public class LivroDAO implements Serializable {
 				.setParameter("id", id).getSingleResult();
 	}
 
+	public void setEntityManager(EntityManager manager) {
+		this.manager = manager;
+	}
 }

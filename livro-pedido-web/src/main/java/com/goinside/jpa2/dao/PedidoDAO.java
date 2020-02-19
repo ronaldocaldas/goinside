@@ -47,4 +47,8 @@ public class PedidoDAO implements Serializable {
 		return manager.createQuery("select c from Pedido c where c.nome like :nome", Pedido.class)
 				.setParameter("nome", "%" + nome + "%").getSingleResult();
 	}
+
+	public void setEntityManager(EntityManager manager) {
+		this.manager = manager;
+	}
 }

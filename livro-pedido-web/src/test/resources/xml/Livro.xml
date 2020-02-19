@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<livro id="1" titulo="Mindset" isbn="45582915583" codigo_fornecedor="1" valor="99.99" />
+	<livro id="2" titulo="Pai rico Pai pobre" isbn="83217346424" codigo_fornecedor="2" valor="19.99"/>
+	<livro id="3" titulo="1001 Filmes para ver antes de morrer" isbn="89612129312" codigo_fornecedor="2" valor="59.99"/>
+	<livro id="4" titulo="Certificação Java" isbn="89612129312" codigo_fornecedor="2" valor="129.99"/>
+	
+</dataset>

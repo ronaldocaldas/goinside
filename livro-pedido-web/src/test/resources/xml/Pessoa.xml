@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<pessoa id="1" nome="Pedro" cpf="45582915583" tipo_pessoa="VENDEDOR" />
+	<pessoa id="2" nome="Mario" cpf="83217346424" tipo_pessoa="VENDEDOR" />
+	<pessoa id="3" nome="Rose" cpf="89612129312" tipo_pessoa="VENDEDOR" />
+	<pessoa id="4" nome="Duda" cpf="45582915583" tipo_pessoa="CLIENTE" />
+	<pessoa id="5" nome="Ricardo" cpf="83217346424" tipo_pessoa="CLIENTE" />
+	<pessoa id="6" nome="Mauro" cpf="89612129312" tipo_pessoa="CLIENTE" />
+</dataset>

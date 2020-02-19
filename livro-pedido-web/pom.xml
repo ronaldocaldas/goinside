@@ -127,7 +127,6 @@
 			<version>3.4</version>
 			<scope>compile</scope>
 		</dependency>
-		
 	</dependencies>
 
 	<!-- Repositorio PrimeFaces -->
@@ -145,6 +144,5 @@
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
 	</repositories>
-
 
 </project>
